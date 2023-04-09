@@ -1,0 +1,243 @@
+﻿<Window
+    x:Class="Graph_Visualizer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Graph_Visualizer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    Title="Graph Visualizer"
+    Width="1600"
+    Height="950"
+    Loaded="MainWindow_OnLoaded"
+    mc:Ignorable="d">
+    <DockPanel
+        Width="Auto"
+        Height="850"
+        Margin="10">
+        <Viewbox x:Name="ViewBox">
+            <ItemsControl x:Name="CanvasMain" ItemsSource="{Binding GraphObjects.Collection}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas
+                            Width="1050"
+                            Height="850"
+                            Background="Bisque"
+                            ClipToBounds="True"
+                            IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <!--  These setters will control the position of the shape  -->
+                        <Setter Property="Canvas.Top" Value="{Binding Top}" />
+                        <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                        <Setter Property="Panel.ZIndex" Value="{Binding ZIndex}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type local:VertexAsEllipse}">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse
+                                Width="20"
+                                Height="20"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Fill="Aqua"
+                                MouseDown="Ellipse_MouseDown"
+                                MouseMove="Ellipse_MouseMove"
+                                MouseUp="Ellipse_MouseUp" />
+                            <TextBlock
+                                Padding="10,0"
+                                HorizontalAlignment="Center"
+                                FontWeight="Bold"
+                                Foreground="Blue"
+                                Text="{Binding VertexName}" />
+                        </StackPanel>
+
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:EdgesAsLines}">
+                        <Grid Width="Auto" Height="Auto">
+                            <Line
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Stroke="{Binding Color}"
+                                StrokeThickness="3"
+                                X1="{Binding X1}"
+                                X2="{Binding X2}"
+                                Y1="{Binding Y1}"
+                                Y2="{Binding Y2}" />
+                            <TextBlock
+                                Margin="{Binding Margin}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="Blue"
+                                FontWeight="Bold"
+                                Text="{Binding Weight}"
+                                TextAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
+        </Viewbox>
+        <Grid Width="Auto" Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox
+                        x:Name="TxtBoxAddVertex"
+                        Width="250"
+                        Height="60"
+                        Margin="10"
+                        Padding="10"
+                        HorizontalAlignment="Left"
+                        FontSize="30"
+                        Text="Name of Vertex" />
+                    <Button
+                        x:Name="BtnAddVertex"
+                        Width="Auto"
+                        Height="60"
+                        Margin="10"
+                        Padding="20,0"
+                        HorizontalAlignment="Right"
+                        Click="BtnAddVertex_OnClick"
+                        Content="Add Vertex"
+                        FontSize="30">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox
+                        x:Name="TxtBoxAddEdge"
+                        Width="250"
+                        Height="60"
+                        Margin="10"
+                        Padding="10,10,10,0"
+                        HorizontalAlignment="Left"
+                        FontSize="30"
+                        Text="From,To,Weight" />
+                    <Button
+                        x:Name="BtnAddEdge"
+                        Width="Auto"
+                        Height="60"
+                        Margin="10"
+                        Padding="20,0"
+                        HorizontalAlignment="Right"
+                        Click="BtnAddEdge_OnClick"
+                        Content="Add Edge"
+                        FontSize="30">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+                <StackPanel Margin="0,50" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Width="80"
+                            Height="60"
+                            Margin="10"
+                            Padding="10,10,10,0"
+                            FontSize="30"
+                            Text="From" />
+                        <ComboBox
+                            x:Name="CmbBoxFrom"
+                            Width="350"
+                            Height="60"
+                            Margin="10"
+                            Padding="10,10,10,0"
+                            DisplayMemberPath="VertexName"
+                            FontSize="30"
+                            Text="Select Vertex">
+                            <ComboBox.ItemsSource>
+                                <Binding Path="GraphObjects.Vertices" />
+                            </ComboBox.ItemsSource>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Width="80"
+                            Height="60"
+                            Margin="10"
+                            Padding="10,10,10,0"
+                            FontSize="30"
+                            Text="To" />
+                        <ComboBox
+                            x:Name="CmbBoxTo"
+                            Width="350"
+                            Height="60"
+                            Margin="10"
+                            Padding="10,10,10,0"
+                            FontSize="30"
+                            Text="Select Vertex"
+                            DisplayMemberPath="VertexName"
+                            >
+                            <ComboBox.ItemsSource>
+                                <Binding Path="GraphObjects.Vertices" />
+                            </ComboBox.ItemsSource>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Button
+                        x:Name="BtnShortestPath"
+                        Width="Auto"
+                        Height="60"
+                        Margin="10"
+                        Padding="20,0"
+                        HorizontalAlignment="Right"
+                        Click="BtnGetShortestPath_OnClick"
+                        Content="Get Shortest Path"
+                        FontSize="30">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+                <Button
+                    x:Name="BtnClearGraph"
+                    HorizontalAlignment="Center"
+                    Width="Auto"
+                    Height="60"
+                    Margin="10"
+                    Padding="20,0"
+                    Content="Clear Graph"
+                    FontSize="30"
+                    Click="BtnClearGraph_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
+                    x:Name="BtnReloadDefault"
+                    HorizontalAlignment="Center"
+                    Width="Auto"
+                    Height="60"
+                    Margin="10"
+                    Padding="20,0"
+                    Content="Reload Default"
+                    FontSize="30"
+                    Click="BtnReloadDefault_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </DockPanel>
+</Window>
