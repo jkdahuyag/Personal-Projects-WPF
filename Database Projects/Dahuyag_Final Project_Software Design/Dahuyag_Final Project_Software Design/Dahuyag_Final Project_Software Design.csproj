@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Dahuyag_Final_Project_Software_Design</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\arrow-down-svgrepo-com.png" />
+    <None Remove="Images\arrow-up-svgrepo-com.png" />
+    <None Remove="Images\cross-circle-svgrepo-com.png" />
+    <None Remove="Images\cross-small-svgrepo-com.png" />
+    <None Remove="Images\edit-svgrepo-com.png" />
+    <None Remove="Images\plus-alt-svgrepo-com.png" />
+    <None Remove="Images\plus-square-svgrepo-com.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="21.1.37" />
+    <PackageReference Include="Syncfusion.Themes.Windows11Light.WPF" Version="21.1.37" />
+    <PackageReference Include="syncfusion.ui.wpf.net" Version="20.4.0.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GlobalComputerSolutionsDb\GlobalComputerSolutionsDb.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\arrow-down-svgrepo-com.png" />
+    <Resource Include="Images\arrow-up-svgrepo-com.png" />
+    <Resource Include="Images\cross-circle-svgrepo-com.png" />
+    <Resource Include="Images\cross-small-svgrepo-com.png" />
+    <Resource Include="Images\edit-svgrepo-com.png" />
+    <Resource Include="Images\plus-alt-svgrepo-com.png" />
+    <Resource Include="Images\plus-square-svgrepo-com.png" />
+  </ItemGroup>
+
+</Project>

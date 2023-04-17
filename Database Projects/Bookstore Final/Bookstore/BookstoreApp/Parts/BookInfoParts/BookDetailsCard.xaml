@@ -1,0 +1,122 @@
+﻿<UserControl
+    x:Class="BookstoreApp.Parts.BookInfo.BookDetailsCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BookstoreApp.Parts.BookInfo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Border
+        Padding="10"
+        BorderBrush="DimGray"
+        BorderThickness="1">
+        <Grid MaxWidth="1024" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                FontSize="32"
+                FontWeight="Bold"
+                Text="{Binding Path=Title, FallbackValue='Sample Title'}" />
+            <TextBlock
+                Grid.Row="1"
+                FontWeight="Bold"
+                Foreground="Gray"
+                Text="{Binding Path=AuthorInString, FallbackValue='Sample Author'}" />
+
+            <TextBlock
+                Grid.Row="3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                FontSize="22"
+                FontWeight="Bold"
+                Text="{Binding Path=Price, FallbackValue='$5,543.05'}" />
+
+            <!--  Book Details  -->
+            <Grid Grid.Row="2">
+                <Grid.Resources>
+                    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Foreground" Value="Gray" />
+                        <Setter Property="FontSize" Value="14" />
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="20" />
+                        <Setter Property="Orientation" Value="Vertical" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                    <Style x:Key="BookDetailsValueStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="14" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="180" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="ISBN" />
+                    <!--  <  -->
+                    <!--  rect  -->
+                    <!--  x="9.001" y="2.004" fill="#757575" width="6" height="2"/>  -->
+                    <Path
+                        Margin="0,3"
+                        HorizontalAlignment="Center"
+                        Data="M21.819,8.815c-0.268-0.499-0.788-0.812-1.354-0.812H14v-1c0-1.104-0.896-2-2-2s-2,0.896-2,2v1H3.537    c-0.566,0-1.087,0.313-1.354,0.812s-0.238,1.105,0.076,1.577c0.264,0.395,0.658,0.684,1.115,0.813l6.627,2.431v3.367h-2    c-1.104,0-2,0.896-2,2v2h12v-2c0-1.104-0.896-2-2-2h-2v-3.367l6.626-2.431c0.457-0.13,0.852-0.419,1.115-0.813    C22.057,9.921,22.086,9.314,21.819,8.815z M12.001,12.004c-0.828,0-1.5-0.671-1.5-1.5c0-0.828,0.672-1.5,1.5-1.5    c0.829,0,1.5,0.672,1.5,1.5C13.501,11.333,12.83,12.004,12.001,12.004z"
+                        Fill="#757575" />
+                    <TextBlock Style="{StaticResource BookDetailsValueStyle}" Text="{Binding Path=Isbn, FallbackValue='020771937-3'}" />
+
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Date Published" />
+                    <Path
+                        Margin="0,3"
+                        HorizontalAlignment="Center"
+                        Data="M21,3h-2V1h-2v5h-2V3H9V1H7v5H5V3H3C1.897,3,1,3.898,1,5v15c0,1.103,0.897,2,2,2h18c1.103,0,2-0.897,2-2V5   C23,3.898,22.103,3,21,3z M8,19H4v-4h4V19z M8,13H4V9h4V13z M14,19h-4v-4h4V19z M14,13h-4V9h4V13z M20,13h-4V9h4V13z"
+                        Fill="#757575" />
+
+                    <TextBlock Style="{StaticResource BookDetailsValueStyle}" Text="{Binding Path=DatePublished, FallbackValue='December 5, 2000'}" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Vertical">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Pages" />
+                    <Grid Margin="3" HorizontalAlignment="Center">
+                        <Path Data="M12,2C8.687,2,6,4.687,6,8v1c0,1.104,0.896,2,2,2s2-0.896,2-2c0,1.104,0.896,2,2,2s2-0.896,2-2    c0,1.104,0.896,2,2,2s2-0.896,2-2V8C18,4.687,15.313,2,12,2z" Fill="#757575" />
+                        <Path Data="M11.071,21.372C11.224,21.751,11.591,22,12,22s0.776-0.249,0.929-0.628L16.677,12H7.323L11.071,21.372z" Fill="#757575" />
+                    </Grid>
+                    <TextBlock Style="{StaticResource BookDetailsValueStyle}" Text="{Binding Path=Pages, FallbackValue='670'}" />
+                </StackPanel>
+                <StackPanel Grid.Column="3" Orientation="Vertical">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Days Since Release" />
+                    <Grid Margin="3" HorizontalAlignment="Center">
+                        <Path Data="M7,10H3c-0.552,0-1,0.448-1,1v7c0,0.552,0.448,1,1,1h4c0.552,0,1-0.448,1-1v-7C8,10.448,7.552,10,7,10z" Fill="#757575" />
+                        <Path Data="M14,6h-4C9.448,6,9,6.448,9,7v11c0,0.552,0.448,1,1,1h4c0.552,0,1-0.448,1-1V7C15,6.448,14.552,6,14,6z" Fill="#757575" />
+                        <Path Data="M21,11h-4c-0.552,0-1,0.448-1,1v6c0,0.552,0.448,1,1,1h4c0.552,0,1-0.448,1-1v-6    C22,11.448,21.552,11,21,11z" Fill="#757575" />
+                    </Grid>
+
+                    <TextBlock Style="{StaticResource BookDetailsValueStyle}" Text="{Binding Path=Age, FallbackValue='8395'}" />
+                </StackPanel>
+                <StackPanel Grid.Column="4" Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Publisher" />
+                    <Grid Margin="3" HorizontalAlignment="Center">
+                        <Path Data="M3,13.999v6c0,1.103,0.897,2,2,2h6v-8H3z" Fill="#757575" />
+                        <Path Data="M13,13.999v8h6c1.103,0,2-0.897,2-2v-6H13z" Fill="#757575" />
+                        <Path Data="M20,7.999h-3.114c0.451-0.234,0.878-0.521,1.235-0.877c1.169-1.169,1.169-3.072,0-4.244    c-1.134-1.131-3.107-1.132-4.242,0.001c-1.636,1.637-1.857,4.718-1.877,5.064C12,7.962,12.01,7.979,12.01,7.999H11.99    c0-0.019,0.01-0.037,0.009-0.057c-0.02-0.346-0.241-3.427-1.878-5.065C8.987,1.746,7.012,1.746,5.878,2.878    c-1.169,1.17-1.169,3.073,0,4.243c0.357,0.356,0.785,0.643,1.236,0.877H4c-1.103,0-2,0.897-2,2v3h9v-4h2v4h9v-3    C22,8.896,21.103,7.999,20,7.999z M7.293,5.707c-0.39-0.39-0.39-1.024,0-1.415C7.481,4.104,7.732,4,8,4    c0.268,0,0.519,0.104,0.708,0.292c0.59,0.59,0.934,1.648,1.118,2.531C8.945,6.639,7.879,6.293,7.293,5.707z M14.174,6.825    c0.184-0.883,0.528-1.942,1.118-2.532C15.481,4.104,15.733,4,16,4s0.519,0.104,0.706,0.291c0.39,0.391,0.391,1.026,0,1.416    C16.116,6.298,15.057,6.642,14.174,6.825z" Fill="#757575" />
+                    </Grid>
+
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BookDetailsValueStyle}" Text="{Binding Path=PublisherName, FallbackValue='OReilly'}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
