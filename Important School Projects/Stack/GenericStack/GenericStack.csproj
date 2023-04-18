@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dahuyag_Assessment_1\Dahuyag_Assessment_1\Dahuyag_Assessment_1.csproj" />
+    <ProjectReference Include="..\LinkedListCore\LinkedListCore\LinkedListCore.csproj" />
+  </ItemGroup>
+
+</Project>
